@@ -2,7 +2,7 @@ import logging
 from typing import Any, Awaitable, Callable, Dict
 
 from aiogram import BaseMiddleware
-from aiogram.types import TelegramObject, Message, Update, MessageEntity
+from aiogram.types import TelegramObject, Message, Update
 
 logger = logging.getLogger(__name__)
 
