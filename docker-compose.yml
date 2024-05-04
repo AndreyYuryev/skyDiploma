@@ -1,0 +1,60 @@
+services:
+  mongodb:
+      image: mongo
+      container_name: mongodb
+      restart: unless-stopped
+      ports:
+        - 27018:27017
+#      expose:
+#        - 27017
+      volumes:
+        -  ./data:/data/db
+      environment:
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: example
+        MONGO_INITDB_DATABASE: newdb
+      networks:
+        - custom
+#      restart: always
+      healthcheck:
+#        test: echo 'db.runCommand({serverStatus:1}).ok' | mongosh admin -u root -p example --quiet | grep 1
+       test:
+          ["CMD","mongosh", "--eval", "db.adminCommand('ping')"]
+##          [
+##            "CMD",
+##            "mongosh",
+##            "--quiet",
+##            "localhost/test",
+##            "--eval",
+##            "'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)'",
+##          ]
+      interval: 20s
+      timeout: 20s
+      retries: 5
+#        start_period: 60s
+#      command: sh -c "mongorestore --username root --password example --authenticationDatabase admin --db newdb --collection mycolection ./data/u_collection.bson"
+
+
+
+  application:
+      build: .
+      container_name: application
+      command: sh -c "python main.py"
+      ports:
+        - '8000:8000'
+      depends_on:
+        mongodb:
+          condition: service_healthy
+#      env_file:
+#        - .env.docker
+      environment:
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: example
+      volumes:
+        - .:/code
+      networks:
+        - custom
+
+networks:
+  custom:
+    driver: bridge
