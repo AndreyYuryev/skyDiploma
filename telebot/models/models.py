@@ -1,9 +1,10 @@
 import datetime
 import json
 from telebot.config.settings import Request
+from typing import Dict
 
 
-async def read_mongo(request: Request, collection):
+async def read_mongo(request: Request, collection) -> str:
     """ Обработка запроса и получение агрегированных данных """
     # # Connect to the MongoDB instance
     # client = pymongo.MongoClient("mongodb://127.0.0.1:27017/")  # , username='root', password='example')
@@ -32,8 +33,6 @@ async def read_mongo(request: Request, collection):
     # lte_date = datetime.datetime(year=date_to[0], month=date_to[1], day=date_to[2],
     #                              hour=date_to[3], minute=date_to[4], second=date_to[5])
 
-
-
     # создание словаря для записи результатов
     aggregated = dict()
     aggregated["dataset"] = list()
@@ -49,7 +48,8 @@ async def read_mongo(request: Request, collection):
                 aggregated["labels"].append(datetime.datetime(current_date.year, current_date.month, current_date.day,
                                                               current_date.hour).isoformat())
                 current_date = current_date + datetime.timedelta(hours=1)
-                current_date = datetime.datetime(current_date.year, current_date.month, current_date.day, current_date.hour)
+                current_date = datetime.datetime(current_date.year, current_date.month, current_date.day,
+                                                 current_date.hour)
             case "day":
                 aggregated["labels"].append(
                     datetime.datetime(current_date.year, current_date.month, current_date.day).isoformat())
@@ -62,7 +62,6 @@ async def read_mongo(request: Request, collection):
                 current_date = datetime.datetime(temp_date.year, temp_date.month, 1)
 
     # cursor = collection.find({"$and": [{"dt": {"$gte": gte_date}}, {"dt": {"$lte": lte_date}}]})
-
 
     # for documents in await cursor.to_list():
     # while await cursor.fetch_next:
@@ -90,9 +89,9 @@ async def read_mongo(request: Request, collection):
                 index = labels.index(date_current.isoformat())
                 values[index] += documents["value"]
 
-
-    # формирование json на основе словаря
+    # # формирование json на основе словаря
     json_str = json.dumps(aggregated)
+    # print(len(aggregated['dataset']), json_str)
     return json_str
 
     # # documents = collection.find({"$and": [{"dt": {"$gte": gte_date}},
