@@ -3,7 +3,7 @@ from environs import Env
 from datetime import datetime
 
 # Включить logger для уровня DEBUG
-LOGGER_DEBUG = True
+LOGGER_DEBUG = False
 
 GROUP_TYPE = ["hour", "day", "month"]
 
