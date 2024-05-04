@@ -52,7 +52,7 @@ async def main():
     # Инициализируем другие объекты (пул соединений с БД, кеш и т.п.)
     logger.info('Подключаем базу данных')
     # Connect to the MongoDB instance
-    client = AsyncIOMotorClient(config.db.db_host)
+    client = AsyncIOMotorClient(config.db.db_host, username=config.db.db_user, password=config.db.db_password)
     collection = client[config.db.database][config.db.collection]
     # # Connect to the MongoDB instance
     # client = pymongo.MongoClient("mongodb://127.0.0.1:27017/")  # , username='root', password='example')
