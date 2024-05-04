@@ -1,8 +1,8 @@
 from aiogram.filters import BaseFilter
 from aiogram.types import Message
-from config.settings import Config
+from telebot.config.settings import Config
 import logging
-from utils.checker import is_json, is_correct_request
+from telebot.utils.checker import is_json, is_correct_request
 
 logger = logging.getLogger(__name__)
 

@@ -1,6 +1,6 @@
 from aiogram.types import Message
 from aiogram.filters import Command, CommandStart
-from lexicon.lexicon import LEXICON_RU
+from telebot.lexicon.lexicon import LEXICON_RU
 from aiogram import Router
 import logging
 

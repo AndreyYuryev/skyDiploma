@@ -1,6 +1,6 @@
 import datetime
 import json
-from config.settings import Request
+from telebot.config.settings import Request
 
 
 async def read_mongo(request: Request, collection):

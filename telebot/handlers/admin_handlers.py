@@ -1,10 +1,10 @@
 
 from aiogram.types import Message
 from aiogram.filters import Command
-from lexicon.lexicon import LEXICON_RU
+from telebot.lexicon.lexicon import LEXICON_RU
 from aiogram import Router, F
-from filters.filters import IsAdmin, IsJSON
-from config.settings import Config
+from telebot.filters.filters import IsAdmin, IsJSON
+from telebot.config.settings import Config
 import logging
 
 # Инициализируем логгер модуля

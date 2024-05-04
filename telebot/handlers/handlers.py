@@ -1,11 +1,11 @@
 
 from aiogram.types import Message
-from lexicon.lexicon import LEXICON_RU
+from telebot.lexicon.lexicon import LEXICON_RU
 from aiogram import Router, F
-from filters.filters import IsCorrectRequest, IsJSON
-from config.settings import  Request
+from telebot.filters.filters import IsCorrectRequest, IsJSON
+from telebot.config.settings import  Request
 import logging
-from models.models import read_mongo
+from telebot.models.models import read_mongo
 import asyncio
 
 # Инициализируем логгер модуля

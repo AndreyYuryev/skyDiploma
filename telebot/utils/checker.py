@@ -1,13 +1,14 @@
 import datetime
 import json
 import logging
-from config.settings import Request, GROUP_TYPE
+from telebot.config.settings import Request, GROUP_TYPE
 from typing import Dict
 
 logger = logging.getLogger(__name__)
 
 
 async def is_json(value: str) -> bool:
+    """ Проверка валидации JSON """
     logger.debug('Проверка JSON внутри функции %s', __name__)
     try:
         # удалить спецсимволы
@@ -21,6 +22,7 @@ async def is_json(value: str) -> bool:
 
 
 async def is_correct_request(value: str) -> bool | Dict:
+    """ Валидация JSON и создание объекта Request """
     logger.debug('Валидация JSON внутри функции %s', __name__)
     try:
         # удалить спецсимволы

@@ -1,9 +1,9 @@
 import pytest
-from filters.filters import IsAdmin
+from telebot.filters.filters import IsAdmin
 from aiogram.types import Message
-from config.settings import load_config, Request
+from telebot.config.settings import load_config, Request
 import datetime
-from utils.checker import is_json, is_correct_request
+from telebot.utils.checker import is_json, is_correct_request
 
 
 @pytest.fixture

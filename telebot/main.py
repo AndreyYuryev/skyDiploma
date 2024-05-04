@@ -8,7 +8,7 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.fsm.storage.memory import MemoryStorage
 # Импортируем настройки
-from config.settings import Config, load_config, LOGGER_DEBUG
+from telebot.config.settings import Config, load_config, LOGGER_DEBUG
 # Импортируем роутеры
 from handlers import admin_handlers, handlers, command_handlers
 # Импортируем миддлвари
