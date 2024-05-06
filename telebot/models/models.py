@@ -22,28 +22,30 @@ async def read_mongo(request: Request, collection) -> str:
     aggregated["dataset"] = list()
     aggregated["labels"] = list()
 
-    current_date = gte_date
-    while current_date <= lte_date:
-        # заполнение нулями
-        aggregated["dataset"].append(0)
-        # заполнение датами
-        match group_type:
-            case "hour":
-                aggregated["labels"].append(datetime.datetime(current_date.year, current_date.month, current_date.day,
-                                                              current_date.hour).isoformat())
-                current_date = current_date + datetime.timedelta(hours=1)
-                current_date = datetime.datetime(current_date.year, current_date.month, current_date.day,
-                                                 current_date.hour)
-            case "day":
-                aggregated["labels"].append(
-                    datetime.datetime(current_date.year, current_date.month, current_date.day).isoformat())
-                current_date = current_date + datetime.timedelta(days=1)
-                current_date = datetime.datetime(current_date.year, current_date.month, current_date.day)
-            case "month":
-                aggregated["labels"].append(
-                    datetime.datetime(current_date.year, current_date.month, current_date.day).isoformat())
-                temp_date = current_date + datetime.timedelta(days=31)
-                current_date = datetime.datetime(temp_date.year, temp_date.month, 1)
+    aggregated["labels"], aggregated["dataset"] = create_labels(gte_date, lte_date, group_type)
+
+    # current_date = gte_date
+    # while current_date <= lte_date:
+    #     # заполнение нулями
+    #     aggregated["dataset"].append(0)
+    #     # заполнение датами
+    #     match group_type:
+    #         case "hour":
+    #             aggregated["labels"].append(datetime.datetime(current_date.year, current_date.month, current_date.day,
+    #                                                           current_date.hour).isoformat())
+    #             current_date = current_date + datetime.timedelta(hours=1)
+    #             current_date = datetime.datetime(current_date.year, current_date.month, current_date.day,
+    #                                              current_date.hour)
+    #         case "day":
+    #             aggregated["labels"].append(
+    #                 datetime.datetime(current_date.year, current_date.month, current_date.day).isoformat())
+    #             current_date = current_date + datetime.timedelta(days=1)
+    #             current_date = datetime.datetime(current_date.year, current_date.month, current_date.day)
+    #         case "month":
+    #             aggregated["labels"].append(
+    #                 datetime.datetime(current_date.year, current_date.month, current_date.day).isoformat())
+    #             temp_date = current_date + datetime.timedelta(days=31)
+    #             current_date = datetime.datetime(temp_date.year, temp_date.month, 1)
 
     # cursor = collection.find({"$and": [{"dt": {"$gte": gte_date}}, {"dt": {"$lte": lte_date}}]})
 
@@ -77,3 +79,31 @@ async def read_mongo(request: Request, collection) -> str:
     json_str = json.dumps(aggregated)
     # print(len(aggregated['dataset']), json_str)
     return json_str
+
+
+async def create_labels(from_date: datetime, till_date: datetime, group_type) -> list:
+    current_date = from_date
+    labels = list()
+    dataset = list()
+    while current_date <= till_date:
+        # заполнение нулями
+        dataset.append(0)
+        # заполнение датами
+        match group_type:
+            case "hour":
+                labels.append(datetime.datetime(current_date.year, current_date.month, current_date.day,
+                                                current_date.hour).isoformat())
+                current_date = current_date + datetime.timedelta(hours=1)
+                current_date = datetime.datetime(current_date.year, current_date.month, current_date.day,
+                                                 current_date.hour)
+            case "day":
+                labels.append(
+                    datetime.datetime(current_date.year, current_date.month, current_date.day).isoformat())
+                current_date = current_date + datetime.timedelta(days=1)
+                current_date = datetime.datetime(current_date.year, current_date.month, current_date.day)
+            case "month":
+                labels.append(
+                    datetime.datetime(current_date.year, current_date.month, current_date.day).isoformat())
+                temp_date = current_date + datetime.timedelta(days=31)
+                current_date = datetime.datetime(temp_date.year, temp_date.month, 1)
+    return labels, dataset
