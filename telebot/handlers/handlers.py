@@ -1,9 +1,8 @@
-
 from aiogram.types import Message
 from telebot.lexicon.lexicon import LEXICON_RU
 from aiogram import Router, F
 from telebot.filters.filters import IsCorrectRequest, IsJSON
-from telebot.config.settings import  Request
+from telebot.config.settings import Request
 import logging
 from telebot.models.models import read_mongo
 import asyncio
@@ -18,15 +17,15 @@ router = Router()
 @router.message(F.text, IsJSON(), IsCorrectRequest())
 async def process_json_request(message: Message, request: Request, collection):
     """ Хендлер обрабатывающий текстовые сообщения в формате JSON """
+    MAX_SYMBOLS = 4095
     for fut in asyncio.as_completed([read_mongo(request, collection), ]):
         answer = await fut
-        if len(answer) > 4000:
-            for item in range(len(answer)//4000+1):
-                splitted = answer[item*4000:item*4000+4000]
+        if len(answer) > MAX_SYMBOLS:
+            for item in range(len(answer) // MAX_SYMBOLS + 1):
+                splitted = answer[item * MAX_SYMBOLS:item * MAX_SYMBOLS + MAX_SYMBOLS]
                 await message.answer(text=splitted)
         else:
             await message.answer(text=answer)
-
 
 
 @router.message()
