@@ -4,6 +4,7 @@ from aiogram.types import Message
 from telebot.config.settings import load_config, Request
 import datetime
 from telebot.utils.checker import is_json, is_correct_request
+from unittest.mock import AsyncMock
 
 
 @pytest.fixture
@@ -114,6 +115,15 @@ async def test_incorrect_request_2(wrong_date_in_json_2):
     assert result
     result = await is_correct_request(wrong_date_in_json_2)
     assert not result
+
+
+# @pytest.mark.asyncio
+# async def test_process_start_command():
+#     message = AsyncMock()
+#     result = await IsCorre(message)
+#     assert result
+
+
 
 # @pytest.fixture
 # def mock_thing():
