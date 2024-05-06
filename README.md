@@ -66,3 +66,7 @@
 - Создать образы и контейнеры Docker с помощью команд
   - docker-compose build
   - docker-compose up
+
+
+### При заполнении базы MongoDB использовалась утилиты `mongosh` и `mongorestore`
+### Если использовать локальную MongoDB то загрузку данных выполнять лучше через MongoCompas
