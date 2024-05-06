@@ -27,4 +27,4 @@ async def answer_if_admins_update(message: Message):
 async def answer_if_admins_update_others(message: Message, config: Config):
     """ Хендлер обрабатывающий все остальные апдейты от админа """
     logger.debug('Вошли в хэндлер, обрабатывающий сообщения от админа')
-    await message.reply(text=LEXICON_RU['adm_upd'])
+    await message.answer(text=LEXICON_RU['adm_upd'])
