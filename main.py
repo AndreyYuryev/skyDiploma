@@ -10,12 +10,12 @@ from aiogram.fsm.storage.memory import MemoryStorage
 # Импортируем настройки
 from telebot.config.settings import Config, load_config, LOGGER_DEBUG
 # Импортируем роутеры
-from handlers import admin_handlers, handlers, command_handlers
+from telebot.handlers import admin_handlers, handlers, command_handlers
 # Импортируем миддлвари
-from middlewares.outer import OuterMiddleware
-from middlewares.inner import InnerMiddleware
+from telebot.middlewares.outer import OuterMiddleware
+from telebot.middlewares.inner import InnerMiddleware
 # Импортируем вспомогательные функции для создания нужных объектов
-from keyboards.main_menu import set_main_menu
+from telebot.keyboards.main_menu import set_main_menu
 
 # Инициализируем логгер
 logger = logging.getLogger(__name__)
@@ -34,7 +34,7 @@ async def main():
 
     # Загружаем конфиг в переменную config
     logger.debug('Загрузка настроек')
-    config: Config = load_config()
+    config: Config = load_config('telebot/.env')
 
     # Инициализируем объект хранилища
     logger.debug('Инициализация хранилища')
@@ -52,7 +52,10 @@ async def main():
     # Инициализируем другие объекты (пул соединений с БД, кеш и т.п.)
     logger.info('Подключаем базу данных')
     # Connect to the MongoDB instance
-    client = AsyncIOMotorClient(config.db.db_host, username=config.db.db_user, password=config.db.db_password)
+    uri = ''.join(["mongodb://", config.db.db_user, ":", config.db.db_password, "@", config.db.db_host])
+    logger.info(uri)
+    # client = AsyncIOMotorClient(config.db.db_host, username=config.db.db_user, password=config.db.db_password)
+    client = AsyncIOMotorClient(uri)
     collection = client[config.db.database][config.db.collection]
     # # Connect to the MongoDB instance
     # client = pymongo.MongoClient("mongodb://127.0.0.1:27017/")  # , username='root', password='example')
