@@ -59,7 +59,7 @@
 4. Установить необходимые библиотеки из requirements.txt
 5. Запустить докер
 6. Поднять контейнер с базой данных MongoDB
-7. Заполнить базу данных MongoDB данными на основе файла `sample_collection.bson` с помощью команды `mongorestore --u user --p password --db database --collection mycollection /data/sample_collection.db` или загрузить данные из файла `sample_collection.json` с помощью MongoDBCompas. Файлы с данными находятся в папке `data` 
+7. Заполнить базу данных MongoDB данными на основе файла `sample_collection.bson` с помощью команды `mongorestore --u user --p password --authenticationDatabase admin --db newdb --collection mycollection /data/sample_collection.db` или загрузить данные из файла `sample_collection.json` с помощью MongoDBCompas. Файлы с данными находятся в папке `data` 
 8. Поднять контейнер с приложением
 
 ### Работа с Docker
