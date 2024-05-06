@@ -121,7 +121,7 @@ celerybeat.pid
 
 # Environments
 .env
-.env.docker
+telebot/.env
 .venv
 env/
 venv/
