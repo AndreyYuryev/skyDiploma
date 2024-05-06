@@ -22,7 +22,8 @@ async def read_mongo(request: Request, collection) -> str:
     aggregated["dataset"] = list()
     aggregated["labels"] = list()
 
-    aggregated["labels"], aggregated["dataset"] = create_labels(gte_date, lte_date, group_type)
+    # async for aggregated["labels"], aggregated["dataset"] in
+    aggregated["labels"], aggregated["dataset"] = await create_labels(gte_date, lte_date, group_type)
 
     # current_date = gte_date
     # while current_date <= lte_date:
