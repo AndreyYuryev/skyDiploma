@@ -48,7 +48,7 @@
 3. Создать телеграм бот и получить токен к нему через BotFather
 4. Установить необходимые библиотеки из requirements.txt
 5. Заполнить файл переменных окружения .env
-6. Заполнить базу данных MongoDB данными на основе файла `sample_collection.bson` с помощью команды `mongorestore --u user --p password --db database --collection mycollection /data/sample_collection.db` или загрузить данные из файла `sample_collection.json` с помощью MongoDBCompas. Файлы с данными находятся в папке `data` 
+6. Заполнить базу данных MongoDB данными на основе файла `sample_collection.bson` с помощью команды `mongorestore --u user --p password --authenticationDatabase admin --db database --collection mycollection /data/sample_collection.db` или загрузить данные из файла `sample_collection.json` с помощью MongoDBCompas. Файлы с данными находятся в папке `data` 
 
 
 ### Установка проекта с помощью Docker
