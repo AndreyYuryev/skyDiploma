@@ -57,15 +57,12 @@
 2. Создать телеграм бот и получить токен к нему через BotFather
 3. Заполнить файл переменных окружения .env используя настройки docker-compose.yml
 4. Установить необходимые библиотеки из requirements.txt
-5. Поднять контейнер с базой данных MongoDB
-6. Заполнить базу данных MongoDB данными на основе файла `sample_collection.bson` с помощью команды `mongorestore --u user --p password --db database --collection mycollection /data/sample_collection.db` или загрузить данные из файла `sample_collection.json` с помощью MongoDBCompas. Файлы с данными находятся в папке `data` 
-7. Поднять контейнер с приложением
+5. Запустить докер
+6. Поднять контейнер с базой данных MongoDB
+7. Заполнить базу данных MongoDB данными на основе файла `sample_collection.bson` с помощью команды `mongorestore --u user --p password --db database --collection mycollection /data/sample_collection.db` или загрузить данные из файла `sample_collection.json` с помощью MongoDBCompas. Файлы с данными находятся в папке `data` 
+8. Поднять контейнер с приложением
 
-
-> В разработке 
-### Для запуска с помощью Docker необходимо
-
-- Создать и заполнить файл переменных окружения .env.docker с учетом настроек в файле docker-compose.yml
-- Создать образы и контейнеры DOCKER с помощью команд
+### Работа с Docker
+- Создать образы и контейнеры Docker с помощью команд
   - docker-compose build
   - docker-compose up
