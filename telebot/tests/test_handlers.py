@@ -2,9 +2,9 @@ from unittest.mock import AsyncMock
 import pytest
 from telebot.handlers.admin_handlers import answer_if_admins_update, answer_if_admins_update_others
 from telebot.handlers.command_handlers import process_start_command, process_help_command
-from telebot.handlers.handlers import send_echo, process_json_request
+from telebot.handlers.handlers import send_echo
 from telebot.lexicon.lexicon import LEXICON_RU
-from telebot.config.settings import load_config, Config, Request
+from telebot.config.settings import load_config, Config
 
 @pytest.mark.asyncio
 async def test_admins_update():

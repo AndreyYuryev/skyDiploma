@@ -6,6 +6,7 @@ from cachetools import TTLCache
 
 CACHE = TTLCache(maxsize=10_000, ttl=5)  # Максимальный размер кэша - 10000 ключей, а время жизни ключа - 5 секунд
 
+
 class ThrottlingMiddleware(BaseMiddleware):
     """ Миддлварь для предотвращения троттлинга """
 

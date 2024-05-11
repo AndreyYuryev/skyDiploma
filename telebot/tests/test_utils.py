@@ -4,7 +4,6 @@ from aiogram.types import Message
 from telebot.config.settings import load_config, Request
 import datetime
 from telebot.utils.checker import is_json, is_correct_request
-from unittest.mock import AsyncMock
 
 
 @pytest.fixture
